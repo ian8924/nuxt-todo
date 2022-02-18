@@ -1,8 +1,8 @@
 <template>
     <header>
+        <!-- menu -->
         <font-awesome-icon class="menu"
-                           icon="bars"
-                           style="font-size: 30px" />
+                           icon="bars" />
     </header>
 </template>
 
@@ -12,7 +12,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 header {
     width: 100%;
     height: 55px;
@@ -20,5 +20,9 @@ header {
     display: flex;
     align-items: center;
     padding: 0 20px;
+    .menu {
+        font-size: 30px;
+        color: #fff;
+    }
 }
 </style>
