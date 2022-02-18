@@ -1,8 +1,18 @@
 <template>
     <header>
-        <!-- menu -->
-        <font-awesome-icon class="menu"
-                           icon="bars" />
+        <div class="left">
+            <!-- menu -->
+            <font-awesome-icon class="menu"
+                               icon="bars" />
+            <div class="title">
+                HandsUP
+            </div>
+        </div>
+        <div class="right">
+            <!-- logout -->
+            <font-awesome-icon class="menu"
+                               icon="arrow-right-from-bracket" />
+        </div>
     </header>
 </template>
 
@@ -19,10 +29,25 @@ header {
     background: #8dc8ff;
     display: flex;
     align-items: center;
-    padding: 0 20px;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
     .menu {
         font-size: 30px;
         color: #fff;
+    }
+    .left {
+        margin-left: 20px;
+        display: flex;
+        align-items: center;
+        .title {
+            margin-left: 20px;
+            font-size: 30px;
+            color: #fff;
+        }
+    }
+    .right {
+        margin-right: 20px;
     }
 }
 </style>
