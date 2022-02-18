@@ -1,16 +1,22 @@
 <template>
     <div class="dashbroad">
-        <font-awesome-icon icon="circle" />
-
+        <TodoList />
     </div>
 </template>
 
 <script>
-// import Default from "../layout/default.vue";
 export default {
     layout: "default",
     name: "IndexPage"
 };
 </script>
 <style scoped>
+.dashbroad {
+    height: 100vh;
+    background: #f8f8f8;
+    padding-top: 70px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
 </style>
