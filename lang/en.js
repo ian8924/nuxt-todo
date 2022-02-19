@@ -3,4 +3,5 @@ export default {
   "todo-title": "ToDo List",
   placeholder: "input something ...",
   created: "created",
+  updated: "updated",
 };

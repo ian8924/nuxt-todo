@@ -22,7 +22,8 @@
                 </div>
                 <!-- show create time -->
                 <div class="time">
-                    {{ fromNow(obj.date) }} {{$t('created')}}
+                    <span v-if="obj.updateTime">{{ fromNow(obj.updateTime) }} {{$t('updated')}}</span>
+                    <span v-else>{{ fromNow(obj.createTime) }} {{$t('created')}}</span>
                 </div>
             </div>
         </div>
@@ -52,7 +53,8 @@ export default {
                     checked: false,
                     id: 0,
                     text: "",
-                    date: ""
+                    createTime: "",
+                    updateTime: ""
                 };
             }
         }
@@ -72,7 +74,8 @@ export default {
                 checked: false,
                 id: 0,
                 text: "",
-                date: ""
+                createTime: "",
+                updateTime: ""
             },
             rows: 1
         };
@@ -83,7 +86,11 @@ export default {
     methods: {
         edit() {
             this.isEdit = false;
-            this.$emit("edit", { ...this.inputData });
+            if (this.obj.text == this.inputData.text && this.obj.checked == this.inputData.checked) {
+                return;
+            }
+            console.log("update");
+            this.$emit("edit", { ...this.inputData, updateTime: moment().format() });
         },
         remove() {
             this.$emit("delete", this.obj.id);

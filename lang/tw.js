@@ -3,4 +3,5 @@ export default {
   "todo-title": "待辦清單",
   placeholder: "請輸入要做的事",
   created: "新增",
+  updated: "編輯",
 };

@@ -86,7 +86,8 @@ export default {
                 checked: false,
                 id: moment().valueOf(),
                 text: this.inputText,
-                date: moment().format()
+                createTime: moment().format(),
+                updateTime: ""
             });
             this.loading = false;
             this.inputText = "";
