@@ -12,7 +12,7 @@ export default {
 </script>
 <style scoped>
 .dashbroad {
-    height: 100vh;
+    min-height: 100vh;
     background: #f8f8f8;
     padding-top: 70px;
     box-sizing: border-box;

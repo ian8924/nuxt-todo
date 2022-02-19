@@ -26,14 +26,15 @@ export default {
 header {
     width: 100%;
     height: 55px;
-    background: #8dc8ff;
+    background: $lightBlue;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: fixed;
+    z-index: 100;
     top: 0;
     .menu {
-        font-size: 30px;
+        font-size: $titleSize;
         color: #fff;
     }
     .left {
@@ -42,7 +43,7 @@ header {
         align-items: center;
         .title {
             margin-left: 20px;
-            font-size: 30px;
+            font-size: $titleSize;
             color: #fff;
         }
     }
