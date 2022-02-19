@@ -5,6 +5,7 @@
                 <div>
                     {{ $t('todo-title') }}
                 </div>
+                <!-- i18n 切換 -->
                 <div class="i18n">
                     <nuxt-link :to="switchLocalePath('en')"
                                style="margin-right:20px">
@@ -15,14 +16,16 @@
                     </nuxt-link>
                 </div>
             </div>
+            <!-- 列表 -->
             <div class="list">
                 <todo-item v-for="(item) in list"
                            @delete="removeItem"
-                           @toggleChecked="toggleCheckedItem"
+                           @edit="editItem"
                            :key="item.id"
                            :obj="item" />
             </div>
         </div>
+        <!-- 輸入匡 -->
         <div class="input">
             <input v-model="inputText"
                    @keypress.enter="addItem"
@@ -96,10 +99,10 @@ export default {
                 this.$store.commit("changeLoading", false);
             }
         },
-        toggleCheckedItem(obj) {
-            this.toggle(obj);
+        editItem(obj) {
+            this.edit(obj);
         },
-        ...mapMutations("todo", ["toggle", "add", "remove"]),
+        ...mapMutations("todo", ["edit", "add", "remove"]),
         ...mapActions("todo", ["getTodoApi", "addTodoApi", "removeTodoApi"])
     }
 };

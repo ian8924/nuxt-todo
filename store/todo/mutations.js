@@ -12,10 +12,14 @@ export default {
     state.list.splice(idx, 1);
     Cookies.set("todo-list", JSON.stringify(state.list));
   },
-  toggle(state, todo) {
-    let { id, val } = todo;
+  edit(state, todo) {
+    console.log(todo);
+    let { id, text, checked } = todo;
     let idx = state.list.findIndex((i) => i.id === id);
-    state.list[idx].checked = val;
+
+    state.list[idx].checked = checked;
+    state.list[idx].text = text;
+    console.log(state.list);
     Cookies.set("todo-list", JSON.stringify(state.list));
   },
 };
