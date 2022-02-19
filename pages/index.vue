@@ -6,6 +6,9 @@
 
 <script>
 export default {
+    head: {
+        title: "HandsUP"
+    },
     layout: "default",
     name: "IndexPage"
 };

@@ -6,8 +6,13 @@
                     {{ $t('todo-title') }}
                 </div>
                 <div class="i18n">
-                    <nuxt-link :to="switchLocalePath('en')">English</nuxt-link>
-                    <nuxt-link :to="switchLocalePath('tw')">中文</nuxt-link>
+                    <nuxt-link :to="switchLocalePath('en')"
+                               style="margin-right:20px">
+                        English
+                    </nuxt-link>
+                    <nuxt-link :to="switchLocalePath('tw')">
+                        中文
+                    </nuxt-link>
                 </div>
             </div>
             <div class="list">
@@ -49,6 +54,18 @@ export default {
             loading: false
         };
     },
+    watch: {
+        "$i18n.locale": {
+            immediate: true,
+            handler(val) {
+                if (val === "tw") {
+                    moment.locale("zh-tw");
+                } else {
+                    moment.locale("en");
+                }
+            }
+        }
+    },
     computed: {
         ...mapGetters("todo", ["list"])
     },
@@ -65,15 +82,19 @@ export default {
             await this.addTodoApi({
                 checked: false,
                 id: moment().valueOf(),
-                text: this.inputText
+                text: this.inputText,
+                date: moment().format()
             });
             this.loading = false;
             this.inputText = "";
         },
         async removeItem(id) {
-            this.$store.commit("changeLoading", true);
-            await this.removeTodoApi(id);
-            this.$store.commit("changeLoading", false);
+            let yes = confirm("你確定刪除嗎？");
+            if (yes) {
+                this.$store.commit("changeLoading", true);
+                await this.removeTodoApi(id);
+                this.$store.commit("changeLoading", false);
+            }
         },
         toggleCheckedItem(obj) {
             this.toggle(obj);

@@ -4,7 +4,7 @@ export default {
     state.list = [...todo];
   },
   add(state, todo) {
-    state.list.push({ ...todo });
+    state.list.unshift({ ...todo });
     Cookies.set("todo-list", JSON.stringify(state.list));
   },
   remove(state, id) {

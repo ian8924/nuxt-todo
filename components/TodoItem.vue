@@ -7,6 +7,9 @@
                    v-model="obj.checked">
             <div class="description">
                 {{ obj.text }}
+                <div class="time">
+                    {{ fromNow(obj.date) }} {{$t('created')}}
+                </div>
             </div>
         </div>
         <div class="right">
@@ -18,6 +21,7 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
     name: "TodoItem",
     props: {
@@ -27,7 +31,8 @@ export default {
                 return {
                     checked: false,
                     id: 0,
-                    text: ""
+                    text: "",
+                    date: ""
                 };
             }
         }
@@ -38,6 +43,9 @@ export default {
         },
         remove() {
             this.$emit("delete", this.obj.id);
+        },
+        fromNow(val) {
+            return moment(val).fromNow();
         }
     }
 };
@@ -47,11 +55,11 @@ export default {
 .to-do-item {
     display: flex;
     justify-content: space-between;
-    height: 60px;
+    margin: 20px 0;
     .left {
         display: flex;
         align-items: center;
-
+        margin-right: 20px;
         input[type="checkbox"] {
             appearance: none;
             background-color: #fff;
@@ -84,6 +92,10 @@ export default {
 
         .description {
             margin-left: 20px;
+            .time {
+                font-size: 12px;
+                color: rgb(120, 114, 114);
+            }
         }
 
         &.checked .description {
