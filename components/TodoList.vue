@@ -2,7 +2,13 @@
     <div class="to-do-list">
         <div>
             <div class="title">
-                ToDo List {{loading}}
+                <div>
+                    {{ $t('todo-title') }}
+                </div>
+                <div class="i18n">
+                    <nuxt-link :to="switchLocalePath('en')">English</nuxt-link>
+                    <nuxt-link :to="switchLocalePath('tw')">中文</nuxt-link>
+                </div>
             </div>
             <div class="list">
                 <todo-item v-for="(item) in list"
@@ -17,7 +23,7 @@
                    @keypress.enter="addItem"
                    type="text"
                    :disabled="loading"
-                   placeholder="請輸入要做的事">
+                   :placeholder="$t('placeholder')">
             <!-- add btn-->
             <button @click="addItem">
                 <font-awesome-icon v-if="!loading"
@@ -86,6 +92,11 @@ export default {
         font-size: $titleSize;
         font-weight: 700;
         margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        .i18n {
+            font-size: 16px;
+        }
     }
     .input {
         width: 100%;

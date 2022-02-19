@@ -39,6 +39,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    "@nuxtjs/i18n",
     "nuxt-fontawesome",
     //OR like this
     [
@@ -55,6 +56,23 @@ export default {
       },
     ],
   ],
+
+  i18n: {
+    locales: ["en", "tw"],
+    defaultLocale: "en",
+    locales: [
+      {
+        code: "en",
+        file: "en.js",
+      },
+      {
+        code: "tw",
+        file: "tw.js",
+      },
+    ],
+    lazy: true,
+    langDir: "lang/",
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
