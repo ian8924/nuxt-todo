@@ -150,6 +150,7 @@ export default {
         .description {
             margin-left: 20px;
             flex-grow: 1;
+            cursor: grabbing;
             .time {
                 font-size: 12px;
                 color: rgb(120, 114, 114);
