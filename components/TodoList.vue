@@ -114,6 +114,8 @@ export default {
     width: 80%;
     background: #fff;
     padding: 30px 33px;
+    border-radius: 4px;
+    border: 1px solid $borderColor;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
