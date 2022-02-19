@@ -1,6 +1,6 @@
 <template>
     <div class="dashbroad">
-        <TodoList />
+        <todo-list />
     </div>
 </template>
 

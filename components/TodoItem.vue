@@ -1,16 +1,17 @@
 <template>
     <div class="to-do-item">
         <div class="left"
-             :class="{'checked':checked}">
+             :class="{'checked':obj.checked}">
             <input type="checkbox"
-                   v-model="checked"
-                   :checked="checked">
+                   @click="toggleChecked"
+                   v-model="obj.checked">
             <div class="description">
-                {{obj.text}} 123
+                {{ obj.text }}
             </div>
         </div>
         <div class="right">
-            <font-awesome-icon icon="trash-can"
+            <font-awesome-icon @click="remove"
+                               icon="trash-can"
                                class="trash" />
         </div>
     </div>
@@ -31,12 +32,14 @@ export default {
             }
         }
     },
-    data() {
-        return {
-            checked: false
-        };
-    },
-    methods: {}
+    methods: {
+        toggleChecked() {
+            this.$emit("toggleChecked", { id: this.obj.id, val: !this.obj.checked });
+        },
+        remove() {
+            this.$emit("delete", this.obj.id);
+        }
+    }
 };
 </script>
 
@@ -92,7 +95,7 @@ export default {
         align-items: center;
         .trash {
             font-size: 25px;
-            color: #f56767;
+            color: $red;
         }
     }
 }

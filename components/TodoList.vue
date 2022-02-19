@@ -2,23 +2,30 @@
     <div class="to-do-list">
         <div>
             <div class="title">
-                ToDo List
+                ToDo List {{loading}}
             </div>
             <div class="list">
-                <todo-item v-for="item in datas"
-                           :key="item.text"
+                <todo-item v-for="(item) in list"
+                           @delete="removeItem"
+                           @toggleChecked="toggleCheckedItem"
+                           :key="item.id"
                            :obj="item" />
-                {{datas}}
             </div>
         </div>
         <div class="input">
             <input v-model="inputText"
-                   @keypress.enter="add"
+                   @keypress.enter="addItem"
                    type="text"
+                   :disabled="loading"
                    placeholder="請輸入要做的事">
             <!-- add btn-->
-            <button @click="add">
-                <font-awesome-icon icon="add"
+            <button @click="addItem">
+                <font-awesome-icon v-if="!loading"
+                                   icon="add"
+                                   style="font-weight:700" />
+                <font-awesome-icon v-else
+                                   icon="spinner"
+                                   class="spinner"
                                    style="font-weight:700" />
             </button>
         </div>
@@ -26,27 +33,42 @@
 </template>
 
 <script>
+import moment from "moment";
+import { mapMutations, mapGetters, mapActions } from "vuex";
 export default {
     name: "ToDoList",
     data() {
         return {
             inputText: "",
-            datas: [
-                {
-                    checked: false,
-                    id: 0,
-                    text: ""
-                }
-            ]
+            loading: false
         };
     },
+    computed: {
+        ...mapGetters("todo", ["list"])
+    },
     methods: {
-        add() {
+        async addItem() {
             if (!this.inputText) return;
-
-            this.datas.push(this.inputText);
+            // this.add();
+            this.loading = true;
+            await this.addTodoApi({
+                checked: false,
+                id: moment().valueOf(),
+                text: this.inputText
+            });
+            this.loading = false;
             this.inputText = "";
-        }
+        },
+        async removeItem(id) {
+            this.$store.commit("changeLoading", true);
+            await this.removeTodoApi(id);
+            this.$store.commit("changeLoading", false);
+        },
+        toggleCheckedItem(obj) {
+            this.toggle(obj);
+        },
+        ...mapMutations("todo", ["toggle", "add", "remove"]),
+        ...mapActions("todo", ["addTodoApi", "removeTodoApi"])
     }
 };
 </script>
@@ -85,6 +107,15 @@ export default {
             font-size: 20px;
             border: none;
             border-radius: 4px;
+        }
+        @keyframes rotate360 {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .spinner {
+            animation: 2s rotate360 infinite linear;
+            cursor: not-allowed;
         }
     }
 }

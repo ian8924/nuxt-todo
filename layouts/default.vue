@@ -1,7 +1,10 @@
 <template>
     <div>
-        <Header />
-        <Nuxt />
+        <loading-mask />
+        <div>
+            <Header />
+            <Nuxt />
+        </div>
     </div>
 </template>
 
