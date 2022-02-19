@@ -52,10 +52,15 @@ export default {
     computed: {
         ...mapGetters("todo", ["list"])
     },
+    async mounted() {
+        this.$store.commit("changeLoading", true);
+        // get datas from cookie
+        await this.getTodoApi();
+        this.$store.commit("changeLoading", false);
+    },
     methods: {
         async addItem() {
             if (!this.inputText) return;
-            // this.add();
             this.loading = true;
             await this.addTodoApi({
                 checked: false,
@@ -74,7 +79,7 @@ export default {
             this.toggle(obj);
         },
         ...mapMutations("todo", ["toggle", "add", "remove"]),
-        ...mapActions("todo", ["addTodoApi", "removeTodoApi"])
+        ...mapActions("todo", ["getTodoApi", "addTodoApi", "removeTodoApi"])
     }
 };
 </script>
